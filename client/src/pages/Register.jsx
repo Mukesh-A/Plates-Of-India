@@ -73,6 +73,7 @@ export const Register = () => {
                 name="firstName"
                 onChange={onInputChange}
                 required
+                invalid
                 validation="Please provide your firstName"
               />
             </div>
@@ -84,6 +85,7 @@ export const Register = () => {
                 name="lastName"
                 onChange={onInputChange}
                 required
+                invalid
                 validation="Please provide your lastName"
               />
             </div>
@@ -95,6 +97,7 @@ export const Register = () => {
                 name="email"
                 onChange={onInputChange}
                 required
+                invalid
                 validation="Please provide your email"
               />
             </div>
@@ -106,6 +109,7 @@ export const Register = () => {
                 name="password"
                 onChange={onInputChange}
                 required
+                invalid
                 validation="Please provide your password"
               />
             </div>
@@ -117,6 +121,7 @@ export const Register = () => {
                 name="confirmPassword"
                 onChange={onInputChange}
                 required
+                invalid
                 validation="Please provide your confirmPassword"
               />
             </div>

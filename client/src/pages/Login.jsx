@@ -72,6 +72,7 @@ export const Login = () => {
                 name="email"
                 onChange={onInputChange}
                 required
+                invalid
                 validation="Please provide your email"
               />
             </div>
@@ -83,6 +84,7 @@ export const Login = () => {
                 name="password"
                 onChange={onInputChange}
                 required
+                invalid
                 validation="Please provide your password"
               />
             </div>

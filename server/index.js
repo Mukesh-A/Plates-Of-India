@@ -3,7 +3,8 @@ import mongoose from "mongoose";
 import dotenv from "dotenv";
 import cors from "cors";
 import morgan from "morgan";
-import route from "./routes/user.js";
+import userRoute from "./routes/user.js";
+import foodRouter from "./routes/food.js";
 dotenv.config();
 
 mongoose.set("strictQuery", true);
@@ -16,7 +17,9 @@ app.use(express.urlencoded({ limit: "30mb", extended: true }));
 
 app.use(cors());
 
-app.use("/users", route); //http:
+app.use("/users", userRoute); //http:
+app.use("/food", foodRouter); //http:
+
 
 const MONGODB_URL =process.env.MONGO_URL
 
