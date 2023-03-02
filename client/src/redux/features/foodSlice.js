@@ -2,7 +2,7 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import * as api from "../api";
 
 export const createfood = createAsyncThunk(
-  "food/createFood",
+  "post/createFood",
   async ({ updatedFoodData, navigate, toast }, { rejectWithValue }) => {
     try {
       const response = await api.createFood(updatedFoodData);
@@ -15,7 +15,7 @@ export const createfood = createAsyncThunk(
   }
 );
 export const getFoods = createAsyncThunk(
-  "food/createFood",
+  "post/getFoods",
   async (_, { rejectWithValue }) => {
     try {
       const response = await api.getFoods();
@@ -25,9 +25,22 @@ export const getFoods = createAsyncThunk(
     }
   }
 );
+export const getPost = createAsyncThunk(
+  "post/getPost",
+  async (id, { rejectWithValue }) => {
+    // console.log("1", id);
+    try {
+      const response = await api.getPost(id);
+      // console.log(response);
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(error.response.data);
+    }
+  }
+);
 
 const foodSlice = createSlice({
-  name: "food",
+  name: "post",
   initialState: {
     food: {},
     foods: [],
@@ -47,7 +60,7 @@ const foodSlice = createSlice({
     },
     [createfood.rejected]: (state, action) => {
       state.loading = false;
-      state.error = action.payload.message;
+      // state.error = action.payload.message;
     },
     [getFoods.pending]: (state, action) => {
       state.loading = true;
@@ -58,7 +71,18 @@ const foodSlice = createSlice({
     },
     [getFoods.rejected]: (state, action) => {
       state.loading = false;
-      state.error = action.payload.message;
+      // state.error = action.payload.message;
+    },
+    [getPost.pending]: (state, action) => {
+      state.loading = true;
+    },
+    [getPost.fulfilled]: (state, action) => {
+      state.loading = false;
+      state.food = action.payload;
+    },
+    [getPost.rejected]: (state, action) => {
+      state.loading = false;
+      // state.error = action.payload.message;
     },
   },
 });

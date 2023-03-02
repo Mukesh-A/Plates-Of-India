@@ -3,11 +3,6 @@ import * as api from "../api";
 // in async function we can pass only one argument it doesn't accept more than one
 // here we have more than one argu so we are passing in the form of object
 
-const jj = {
-  gg: "hghg",
-  game: "trtr",
-};
-
 export const login = createAsyncThunk(
   "auth/login",
   async ({ formValue, navigate, toast }, { rejectWithValue }) => {

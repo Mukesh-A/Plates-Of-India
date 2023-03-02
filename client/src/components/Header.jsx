@@ -34,7 +34,7 @@ export const Header = () => {
         <MDBNavbarBrand
           style={{ color: "#606080", fontWeight: "600", fontSize: "22px" }}
         >
-          <img src={logo} height="70" alt="" loading="lazy" />
+          <img src={logo} height="60" alt="" loading="lazy" />
           Plates of India
         </MDBNavbarBrand>
         <MDBNavbarToggler
@@ -57,7 +57,7 @@ export const Header = () => {
             {user?.user._id && (
               <>
                 <MDBNavbarItem>
-                  <MDBNavbarLink href="/addFood">
+                  <MDBNavbarLink href="/addPost">
                     <p className="header-text">Add Food</p>
                   </MDBNavbarLink>
                 </MDBNavbarItem>
@@ -86,15 +86,12 @@ export const Header = () => {
 
             {user?.user?._id && (
               <h4
-               
-                style={
-                  {
-                    display:"flex",
-                    alignItems:"center",
-                    justifyContent:"center",
-                    color:"blue"
-                  }
-                }
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  color: "blue",
+                }}
               >
                 {user?.user?.name}
               </h4>

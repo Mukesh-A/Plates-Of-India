@@ -23,3 +23,12 @@ export const getFoods = async (req, res) => {
     res.status(404).json({ message: "something went wrong" });
   }
 };
+export const getFood = async (req, res) => {
+  const { id } = req.params;
+  try {
+    const data = await FoodModel.findById(id);
+    res.status(200).json(data);
+  } catch (err) {
+    res.status(404).json({ message: "something went wrong" });
+  }
+};

@@ -18,10 +18,9 @@ app.use(express.urlencoded({ limit: "30mb", extended: true }));
 app.use(cors());
 
 app.use("/users", userRoute); //http:
-app.use("/food", foodRouter); //http:
+app.use("/post", foodRouter); //http:
 
-
-const MONGODB_URL =process.env.MONGO_URL
+const MONGODB_URL = process.env.MONGO_URL;
 
 const port = process.env.PORT;
 

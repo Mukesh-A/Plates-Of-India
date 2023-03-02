@@ -11,7 +11,7 @@ API.interceptors.request.use((req) => {
     req.headers.Authorization = `Bearer ${
       JSON.parse(localStorage.getItem("profile")).token
     }`;
-    console.log("requeste", req);
+    // console.log("requeste", req);
   }
   return req;
 });
@@ -20,5 +20,6 @@ export const signIn = (formdata) => API.post("/users/signin", formdata);
 export const signUp = (formdata) => API.post("/users/signup", formdata);
 
 //Tourdata
-export const createFood = (foodData) => API.post("/food", foodData);
-export const getFood = () => API.get("/food");
+export const createFood = (foodData) => API.post("/post", foodData);
+export const getFoods = () => API.get("/post");
+export const getPost = (id) => API.get(`/post/${id}`);
