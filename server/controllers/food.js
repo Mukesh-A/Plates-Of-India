@@ -4,6 +4,7 @@ export const createFood = async (req, res) => {
   const food = req.body;
   const newFood = new FoodModel({
     ...food,
+    creator: req.userId,
     createdAt: new Date().toISOString(),
   });
   try {

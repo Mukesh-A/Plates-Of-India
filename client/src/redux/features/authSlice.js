@@ -2,11 +2,18 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import * as api from "../api";
 // in async function we can pass only one argument it doesn't accept more than one
 // here we have more than one argu so we are passing in the form of object
+
+const jj = {
+  gg: "hghg",
+  game: "trtr",
+};
+
 export const login = createAsyncThunk(
   "auth/login",
   async ({ formValue, navigate, toast }, { rejectWithValue }) => {
     try {
       const response = await api.signIn(formValue);
+      // console.log(response);
       toast.success("Login successfully");
       navigate("/");
       return response.data;
@@ -57,7 +64,10 @@ const authSlice = createSlice({
     [login.fulfilled]: (state, action) => {
       state.loading = false;
       localStorage.setItem("profile", JSON.stringify({ ...action.payload }));
+      // localStorage.setItem("sample", JSON.stringify(jj));
       state.user = action.payload;
+      console.log("mu", state.user);
+      // console.log("mu", state.user);
     },
     [login.rejected]: (state, action) => {
       state.loading = false;

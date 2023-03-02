@@ -12,7 +12,8 @@ import { AddEditTour } from "./pages/AddEditTour";
 function App() {
   const dispatch = useDispatch();
   const user = JSON.parse(localStorage.getItem("profile"));
-  dispatch(setUser(user));  
+  // console.log(user);
+  dispatch(setUser(user));
   return (
     <BrowserRouter>
       <div className="App">
