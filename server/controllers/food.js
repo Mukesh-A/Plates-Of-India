@@ -87,3 +87,24 @@ export const getPostBySearch = async (req, res) => {
     res.status(404).json({ message: "Something went wrong" });
   }
 };
+export const getPostByTag = async (req, res) => {
+  const { tag } = req.params;
+  try {
+    const posts = await FoodModel.find({ tags: { $in: tag } });
+    // console.log(posts);
+    res.json(posts);
+  } catch (error) {
+    res.status(404).json({ message: "Something went wrong" });
+  }
+};
+
+export const getRelatedPosts = async (req, res) => {
+  const { tag } = req.body;
+  try {
+    const posts = await FoodModel.find({ tags: { $in: tags } });
+    // console.log(posts);
+    res.json(posts);
+  } catch (error) {
+    res.status(404).json({ message: "Something went wrong" });
+  }
+};

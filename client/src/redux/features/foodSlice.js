@@ -88,6 +88,18 @@ export const searchPosts = createAsyncThunk(
     }
   }
 );
+export const searchTags = createAsyncThunk(
+  "post/searchTags",
+  async (tag, { rejectWithValue }) => {
+    try {
+      const response = await api.getPostByTag(tag);
+
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(error.response.data);
+    }
+  }
+);
 
 const foodSlice = createSlice({
   name: "post",
@@ -95,6 +107,7 @@ const foodSlice = createSlice({
     food: {},
     foods: [],
     userFoods: [],
+    tagPosts: [],
     error: "",
     loading: false,
   },
@@ -193,6 +206,17 @@ const foodSlice = createSlice({
       state.foods = action.payload;
     },
     [searchPosts.rejected]: (state, action) => {
+      state.loading = false;
+      state.error = action.payload.message;
+    },
+    [searchTags.pending]: (state, action) => {
+      state.loading = true;
+    },
+    [searchTags.fulfilled]: (state, action) => {
+      state.loading = false;
+      state.tagPosts = action.payload;
+    },
+    [searchTags.rejected]: (state, action) => {
       state.loading = false;
       state.error = action.payload.message;
     },

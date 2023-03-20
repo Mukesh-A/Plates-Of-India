@@ -13,6 +13,7 @@ import { SinglePost } from "./pages/SinglePost";
 import { Dashboard } from "./pages/Dashboard";
 import { PrivateRoute } from "./components/PrivateRoute";
 import { NotFound } from "./pages/NotFound";
+import { TagPosts } from "./pages/TagPosts";
 function App() {
   const dispatch = useDispatch();
   const user = JSON.parse(localStorage.getItem("profile"));
@@ -26,6 +27,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/post/search" element={<Home />} />
+          <Route path="/post/tag/:tag" element={<TagPosts />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route

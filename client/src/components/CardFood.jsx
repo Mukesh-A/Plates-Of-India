@@ -34,7 +34,11 @@ export const CardFood = ({
         />
         <div className="top-left">{name}</div>
         <span className="text-start tag-card">
-          {tags.map((item) => `#${item} `)}
+          {tags.map((tag, index) => (
+            <Link to={`/post/tag/${tag}`} key={index}>
+              #{tag}{" "}
+            </Link>
+          ))}
         </span>
         <MDBCardBody>
           <MDBCardTitle className="text-start"> {title}</MDBCardTitle>

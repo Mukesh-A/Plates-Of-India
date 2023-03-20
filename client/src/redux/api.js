@@ -32,3 +32,4 @@ export const getPostByUser = (userId) => API.get(`/post/userFoods/${userId}`);
 
 export const getPostBySearch = (searchQuery) =>
   API.get(`/post/search?searchQuery=${searchQuery}`);
+export const getPostByTag = (tag) => API.get(`/post/tag/${tag}`);
