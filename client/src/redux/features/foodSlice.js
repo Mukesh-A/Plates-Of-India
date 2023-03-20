@@ -76,6 +76,18 @@ export const updatePost = createAsyncThunk(
     }
   }
 );
+export const searchPosts = createAsyncThunk(
+  "post/searchPosts",
+  async (search, { rejectWithValue }) => {
+    try {
+      const response = await api.getPostBySearch(search);
+
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(error.response.data);
+    }
+  }
+);
 
 const foodSlice = createSlice({
   name: "post",
@@ -172,6 +184,17 @@ const foodSlice = createSlice({
     [updatePost.rejected]: (state, action) => {
       state.loading = false;
       // state.error = action.payload.message;
+    },
+    [searchPosts.pending]: (state, action) => {
+      state.loading = true;
+    },
+    [searchPosts.fulfilled]: (state, action) => {
+      state.loading = false;
+      state.foods = action.payload;
+    },
+    [searchPosts.rejected]: (state, action) => {
+      state.loading = false;
+      state.error = action.payload.message;
     },
   },
 });

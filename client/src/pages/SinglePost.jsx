@@ -28,7 +28,7 @@ export const SinglePost = () => {
   return (
     <>
       <MDBContainer style={{ marginTop: "100px" }}>
-        {console.log(food)}
+        {/* {console.log(food)} */}
         <MDBCard className="mb-3 mt-2">
           <MDBCardImage
             position="top"

@@ -77,3 +77,13 @@ export const updatePost = async (req, res) => {
     res.status(404).json({ message: "something went wrong" });
   }
 };
+export const getPostBySearch = async (req, res) => {
+  const { searchQuery } = req.query;
+  try {
+    const title = new RegExp(searchQuery, "i");
+    const posts = await FoodModel.find({ title });
+    res.json(posts);
+  } catch (error) {
+    res.status(404).json({ message: "Something went wrong" });
+  }
+};

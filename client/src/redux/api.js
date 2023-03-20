@@ -27,4 +27,8 @@ export const deletePost = (id) => API.delete(`/post/${id}`);
 export const updatePost = (updatedPostData, id) =>
   API.patch(`/post/${id}`, updatedPostData);
 export const getPostByUser = (userId) => API.get(`/post/userFoods/${userId}`);
-// console.log(userId);
+
+//search
+
+export const getPostBySearch = (searchQuery) =>
+  API.get(`/post/search?searchQuery=${searchQuery}`);

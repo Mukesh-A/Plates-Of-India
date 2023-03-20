@@ -13,26 +13,41 @@ import {
 import logo from "../assets/logos.png";
 import { useSelector, useDispatch } from "react-redux";
 import { setLogout } from "../redux/features/authSlice";
-
+import { searchPosts } from "../redux/features/foodSlice";
+import { useNavigate } from "react-router-dom";
 export const Header = () => {
   const [show, setShow] = useState(false);
-
+  const [search, setSearch] = useState("");
   // useselctore
   // i have removed the destructure use it if needed (state)=> ({...state.auth})
   const { user } = useSelector((state) => state.auth);
   // console.log({{user}});
-
+  const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const Logout = () => {
     dispatch(setLogout());
   };
+  const handelSubmit = (e) => {
+    e.preventDefault();
+    if (search) {
+      dispatch(searchPosts(search));
+      navigate(`/post/search?searchQuery=${search}`);
+      setSearch("");
+    } else {
+      navigate("/");
+    } 
+  };
 
   return (
-    <MDBNavbar fixed="top" expand="lg" style={{ backgroundColor: "#f0e6ea" }}>
+    <MDBNavbar
+      fixed="top"
+      expand="lg"
+      style={{ backgroundColor: "#f0e6ea", height: "70px" }}
+    >
       <MDBContainer>
         <MDBNavbarBrand
-          style={{ color: "#606080", fontWeight: "600", fontSize: "22px" }}
+          style={{ color: "#606080", fontWeight: "600", fontSize: "18px" }}
         >
           <img src={logo} height="60" alt="" loading="lazy" />
           Plates of India
@@ -87,6 +102,8 @@ export const Header = () => {
             {user?.user?._id && (
               <h4
                 style={{
+                  marginTop: "5px",
+                  padding: "5px",
                   display: "flex",
                   alignItems: "center",
                   justifyContent: "center",
@@ -97,6 +114,20 @@ export const Header = () => {
               </h4>
             )}
           </MDBNavbarNav>
+          <form className="d-flex input-group w-auto" onSubmit={handelSubmit}>
+            <input
+              type="text"
+              className="form-control"
+              placeholder="Search by Title ..."
+              value={search}
+              onChange={(e) => {
+                setSearch(e.target.value);
+              }}
+            />
+            <div className="" style={{ marginTop: "5px", marginLeft: "5px" }}>
+              <MDBIcon fas icon="search" />
+            </div>
+          </form>
         </MDBCollapse>
       </MDBContainer>
     </MDBNavbar>
