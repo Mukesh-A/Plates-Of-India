@@ -23,3 +23,8 @@ export const signUp = (formdata) => API.post("/users/signup", formdata);
 export const createFood = (foodData) => API.post("/post", foodData);
 export const getFoods = () => API.get("/post");
 export const getPost = (id) => API.get(`/post/${id}`);
+export const deletePost = (id) => API.delete(`/post/${id}`);
+export const updatePost = (updatedPostData, id) =>
+  API.patch(`/post/${id}`, updatedPostData);
+export const getPostByUser = (userId) => API.get(`/post/userFoods/${userId}`);
+// console.log(userId);

@@ -3,6 +3,7 @@ import { MDBCol, MDBContainer, MDBRow, MDBTypography } from "mdb-react-ui-kit";
 import { useDispatch, useSelector } from "react-redux";
 import { getFoods } from "../redux/features/foodSlice";
 import { CardFood } from "../components/CardFood";
+import Spinner from "../components/Spinner";
 
 export const Home = () => {
   const { foods, loading } = useSelector((state) => ({ ...state.food }));
@@ -12,7 +13,7 @@ export const Home = () => {
     dispatch(getFoods());
   }, []);
   if (loading) {
-    return <h2>Loading...</h2>;
+    return <Spinner />;
   }
   return (
     <div
@@ -32,7 +33,6 @@ export const Home = () => {
         <MDBCol>
           <MDBContainer>
             <MDBRow className="row-col-1 row-cols-md-3 g-2">
-             
               {foods &&
                 foods?.map((item, index) => <CardFood key={index} {...item} />)}
             </MDBRow>

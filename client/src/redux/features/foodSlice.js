@@ -38,6 +38,44 @@ export const getPost = createAsyncThunk(
     }
   }
 );
+export const getPostByUser = createAsyncThunk(
+  "post/getPostByUser",
+  async (userId, { rejectWithValue }) => {
+    console.log(userId);
+    try {
+      const response = await api.getPostByUser(userId);
+      // console.log(response);
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(error.response.data);
+    }
+  }
+);
+export const deletePost = createAsyncThunk(
+  "post/deletePost",
+  async ({ id, toast }, { rejectWithValue }) => {
+    try {
+      const response = await api.deletePost(id);
+      toast.success("Post deleted Successfully");
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(error.response.data);
+    }
+  }
+);
+export const updatePost = createAsyncThunk(
+  "post/updatePost",
+  async ({ id, updatedPostData, toast, navigate }, { rejectWithValue }) => {
+    try {
+      const response = await api.updatePost(updatedPostData, id);
+      toast.success("Post updated Successfully");
+      navigate("/");
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(error.response.data);
+    }
+  }
+);
 
 const foodSlice = createSlice({
   name: "post",
@@ -81,6 +119,57 @@ const foodSlice = createSlice({
       state.food = action.payload;
     },
     [getPost.rejected]: (state, action) => {
+      state.loading = false;
+      // state.error = action.payload.message;
+    },
+    [getPostByUser.pending]: (state, action) => {
+      state.loading = true;
+    },
+    [getPostByUser.fulfilled]: (state, action) => {
+      state.loading = false;
+      state.userFoods = action.payload;
+    },
+    [getPostByUser.rejected]: (state, action) => {
+      state.loading = false;
+      // state.error = action.payload.message;
+    },
+    [deletePost.pending]: (state, action) => {
+      state.loading = true;
+    },
+    [deletePost.fulfilled]: (state, action) => {
+      state.loading = false;
+      console.log("action", action);
+      const {
+        arg: { id },
+      } = action.meta;
+      if (id) {
+        state.userFoods = state.userFoods.filter((item) => item._id !== id);
+        state.foods = state.foods.filter((item) => item._id !== id);
+      }
+    },
+    [deletePost.rejected]: (state, action) => {
+      state.loading = false;
+      // state.error = action.payload.message;
+    },
+    [updatePost.pending]: (state, action) => {
+      state.loading = true;
+    },
+    [updatePost.fulfilled]: (state, action) => {
+      state.loading = false;
+      console.log("action", action);
+      const {
+        arg: { id },
+      } = action.meta;
+      if (id) {
+        state.userFoods = state.userFoods.map((item) =>
+          item._id === id ? action.payload : item
+        );
+        state.foods = state.foods.filter((item) =>
+          item._id === id ? action.payload : item
+        );
+      }
+    },
+    [updatePost.rejected]: (state, action) => {
       state.loading = false;
       // state.error = action.payload.message;
     },

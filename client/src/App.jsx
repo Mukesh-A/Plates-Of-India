@@ -10,6 +10,9 @@ import { useDispatch } from "react-redux";
 import { setUser } from "./redux/features/authSlice";
 import { AddEditTour } from "./pages/AddEditTour";
 import { SinglePost } from "./pages/SinglePost";
+import { Dashboard } from "./pages/Dashboard";
+import { PrivateRoute } from "./components/PrivateRoute";
+import { NotFound } from "./pages/NotFound";
 function App() {
   const dispatch = useDispatch();
   const user = JSON.parse(localStorage.getItem("profile"));
@@ -24,9 +27,32 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
-          <Route path="/addPost" element={<AddEditTour />} />
-          {/* <Route path="/editTour/:id" element={<AddEditTour />} /> */}
+          <Route
+            path="/addPost"
+            element={
+              <PrivateRoute>
+                <AddEditTour />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="/editTour/:id"
+            element={
+              <PrivateRoute>
+                <AddEditTour />
+              </PrivateRoute>
+            }
+          />
           <Route path="/post/:id" element={<SinglePost />} />
+          <Route
+            path="/dashboard"
+            element={
+              <PrivateRoute>
+                <Dashboard />
+              </PrivateRoute>
+            }
+          />
+          <Route path="*" element={<NotFound />} />
         </Routes>
       </div>
     </BrowserRouter>

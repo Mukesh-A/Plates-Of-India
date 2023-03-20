@@ -10,10 +10,10 @@ import {
 import ChipInput from "material-ui-chip-input";
 import FileBase from "react-file-base64";
 import { useSelector, useDispatch } from "react-redux";
-import { createfood } from "../redux/features/foodSlice";
+import { createfood, updatePost } from "../redux/features/foodSlice";
 
 import { toast } from "react-toastify";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 const initialState = {
   title: "",
@@ -23,12 +23,21 @@ const initialState = {
 
 export const AddEditTour = () => {
   const [foodData, setFoodData] = useState(initialState);
-  const { error, loading } = useSelector((state) => ({ ...state.food }));
+  const { error, loading, userFoods } = useSelector((state) => ({
+    ...state.food,
+  }));
   const { user } = useSelector((state) => ({ ...state.auth }));
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { title, description, tags } = foodData;
+  const { id } = useParams();
 
+  useEffect(() => {
+    if (id) {
+      const singlePost = userFoods.find((food) => food._id === id);
+      setFoodData({ ...singlePost });
+    }
+  }, [id]);
   useEffect(() => {
     error && toast.error(error);
   }, [error]);
@@ -36,8 +45,14 @@ export const AddEditTour = () => {
   const handelSubmit = (e) => {
     e.preventDefault();
     if (title && description && tags) {
-      const updatedFoodData = { ...foodData, name: user?.user?.name };
-      dispatch(createfood({ updatedFoodData, navigate, toast }));
+      const updatedPostData = { ...foodData, name: user?.user?.name };
+      console.log(updatedPostData);
+      if (!id) {
+        dispatch(createfood({ updatedPostData, navigate, toast }));
+      } else {
+        dispatch(updatePost({ id, updatedPostData, toast, navigate }));
+      }
+
       handelClear();
     }
   };
@@ -74,7 +89,7 @@ export const AddEditTour = () => {
       }}
     >
       <MDBCard alignment="center">
-        <h5>Add Tour</h5>
+        <h5>{id ? "Update Post" : "Add Post"}</h5>
         <MDBCardBody>
           <MDBValidation onSubmit={handelSubmit} className="row g-3" noValidate>
             <div className="col-md-12">
@@ -127,7 +142,9 @@ export const AddEditTour = () => {
               />
             </div>
             <div className="col-12">
-              <MDBBtn style={{ width: "100%" }}>Submit</MDBBtn>
+              <MDBBtn style={{ width: "100%" }}>
+                {id ? "UPDATE" : "Submit"}
+              </MDBBtn>
               <MDBBtn
                 style={{ width: "100%" }}
                 className="mt-2"
