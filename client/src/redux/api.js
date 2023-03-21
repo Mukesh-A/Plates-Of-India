@@ -21,7 +21,7 @@ export const signUp = (formdata) => API.post("/users/signup", formdata);
 
 //Tourdata
 export const createFood = (foodData) => API.post("/post", foodData);
-export const getFoods = () => API.get("/post");
+export const getFoods = (page) => API.get(`/post?page=${page}`);
 export const getPost = (id) => API.get(`/post/${id}`);
 export const deletePost = (id) => API.delete(`/post/${id}`);
 export const updatePost = (updatedPostData, id) =>
@@ -33,3 +33,4 @@ export const getPostByUser = (userId) => API.get(`/post/userFoods/${userId}`);
 export const getPostBySearch = (searchQuery) =>
   API.get(`/post/search?searchQuery=${searchQuery}`);
 export const getPostByTag = (tag) => API.get(`/post/tag/${tag}`);
+export const getRelatedPosts = (tags) => API.post(`/post/relatedPosts`, tags);

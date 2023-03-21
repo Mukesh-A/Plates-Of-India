@@ -1,17 +1,22 @@
 import React, { useEffect } from "react";
 import { MDBCol, MDBContainer, MDBRow, MDBTypography } from "mdb-react-ui-kit";
 import { useDispatch, useSelector } from "react-redux";
-import { getFoods } from "../redux/features/foodSlice";
+import { getFoods, setCurrentPage } from "../redux/features/foodSlice";
 import { CardFood } from "../components/CardFood";
 import Spinner from "../components/Spinner";
+import { Pagination } from "../components/Pagination";
 
 export const Home = () => {
-  const { foods, loading } = useSelector((state) => ({ ...state.food }));
+  const { foods, loading, currentPage, numberOfPages } = useSelector(
+    (state) => ({
+      ...state.food,
+    })
+  );
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(getFoods());
-  }, []);
+    dispatch(getFoods(currentPage));
+  }, [currentPage]);
   if (loading) {
     return <Spinner />;
   }
@@ -22,6 +27,8 @@ export const Home = () => {
         padding: "15px",
         maxWidth: "1000px",
         alignContent: "center",
+        // display:"flex",
+        // gap:"50px"
       }}
     >
       <MDBRow className="mt-5">
@@ -39,6 +46,12 @@ export const Home = () => {
           </MDBContainer>
         </MDBCol>
       </MDBRow>
+      <Pagination
+        currentPage={currentPage}
+        numberOfPages={numberOfPages}
+        dispatch={dispatch}
+        setCurrentPage={setCurrentPage}
+      />
     </div>
   );
 };

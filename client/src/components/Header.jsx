@@ -15,6 +15,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { setLogout } from "../redux/features/authSlice";
 import { searchPosts } from "../redux/features/foodSlice";
 import { useNavigate } from "react-router-dom";
+import decode from "jwt-decode";
 export const Header = () => {
   const [show, setShow] = useState(false);
   const [search, setSearch] = useState("");
@@ -24,6 +25,14 @@ export const Header = () => {
   // console.log({{user}});
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const token = user?.token;
+
+  if (token) {
+    const decodedToken = decode(token);
+    if (decodedToken.exp * 1000 < new Date().getTime()) {
+      dispatch(setLogout());
+    }
+  }
 
   const Logout = () => {
     dispatch(setLogout());
@@ -36,7 +45,7 @@ export const Header = () => {
       setSearch("");
     } else {
       navigate("/");
-    } 
+    }
   };
 
   return (

@@ -3,9 +3,9 @@ import * as api from "../api";
 
 export const createfood = createAsyncThunk(
   "post/createFood",
-  async ({ updatedFoodData, navigate, toast }, { rejectWithValue }) => {
+  async ({ updatedPostData, navigate, toast }, { rejectWithValue }) => {
     try {
-      const response = await api.createFood(updatedFoodData);
+      const response = await api.createFood(updatedPostData);
       toast.success("Post Add successfully");
       navigate("/");
       return response.data;
@@ -16,9 +16,10 @@ export const createfood = createAsyncThunk(
 );
 export const getFoods = createAsyncThunk(
   "post/getFoods",
-  async (_, { rejectWithValue }) => {
+  async (page, { rejectWithValue }) => {
     try {
-      const response = await api.getFoods();
+      // console.log(page);
+      const response = await api.getFoods(page);
       return response.data;
     } catch (error) {
       return rejectWithValue(error.response.data);
@@ -100,6 +101,18 @@ export const searchTags = createAsyncThunk(
     }
   }
 );
+export const getRelatedPosts = createAsyncThunk(
+  "post/getRelatedPosts",
+  async (tags, { rejectWithValue }) => {
+    try {
+      const response = await api.getRelatedPosts(tags);
+
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(error.response.data);
+    }
+  }
+);
 
 const foodSlice = createSlice({
   name: "post",
@@ -108,10 +121,17 @@ const foodSlice = createSlice({
     foods: [],
     userFoods: [],
     tagPosts: [],
+    relatedPosts: [],
+    currentPage: 1,
+    numberOfPages: null,
     error: "",
     loading: false,
   },
-
+  reducers: {
+    setCurrentPage: (state, action) => {
+      state.currentPage = action.payload;
+    },
+  },
   extraReducers: {
     // login promise
     [createfood.pending]: (state, action) => {
@@ -130,7 +150,10 @@ const foodSlice = createSlice({
     },
     [getFoods.fulfilled]: (state, action) => {
       state.loading = false;
-      state.foods = action.payload;
+      state.foods = action.payload.data;
+      // console.log(action.payload);
+      state.numberOfPages = action.payload.numberOfPages;
+      state.currentPage = action.payload.currentPage;
     },
     [getFoods.rejected]: (state, action) => {
       state.loading = false;
@@ -220,7 +243,19 @@ const foodSlice = createSlice({
       state.loading = false;
       state.error = action.payload.message;
     },
+    [getRelatedPosts.pending]: (state, action) => {
+      state.loading = true;
+    },
+    [getRelatedPosts.fulfilled]: (state, action) => {
+      state.loading = false;
+      state.relatedPosts = action.payload;
+    },
+    [getRelatedPosts.rejected]: (state, action) => {
+      state.loading = false;
+      state.error = action.payload.message;
+    },
   },
 });
+export const { setCurrentPage } = foodSlice.actions;
 export default foodSlice.reducer;
 // export const { createfood } = foodSlice.actions;

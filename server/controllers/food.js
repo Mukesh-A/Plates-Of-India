@@ -17,9 +17,18 @@ export const createFood = async (req, res) => {
 };
 
 export const getFoods = async (req, res) => {
+  const { page } = req.query;
   try {
-    const data = await FoodModel.find();
-    res.status(200).json(data);
+    const limit = 6;
+    const startIndex = (Number(page) - 1) * limit;
+    const total = await FoodModel.countDocuments({});
+    const posts = await FoodModel.find().limit(limit).skip(startIndex);
+    res.status(200).json({
+      data: posts,
+      currentPage: Number(page),
+      totalPosts: total,
+      numberOfPages: Math.ceil(total / limit),
+    });
   } catch (err) {
     res.status(404).json({ message: "something went wrong" });
   }
@@ -99,10 +108,11 @@ export const getPostByTag = async (req, res) => {
 };
 
 export const getRelatedPosts = async (req, res) => {
-  const { tag } = req.body;
+  const tags = req.body;
+  // console.log(tags);
   try {
     const posts = await FoodModel.find({ tags: { $in: tags } });
-    // console.log(posts);
+    // console.log(res.json(posts));
     res.json(posts);
   } catch (error) {
     res.status(404).json({ message: "Something went wrong" });

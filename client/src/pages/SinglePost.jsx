@@ -10,15 +10,20 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 
-import { getPost } from "../redux/features/foodSlice.js";
+import { getPost, getRelatedPosts } from "../redux/features/foodSlice.js";
 import moment from "moment";
+import { RelatedPosts } from "../components/RelatedPosts.jsx";
 // import logo from "../assets/logos.png";
 export const SinglePost = () => {
   const dispatch = useDispatch();
-  const { food } = useSelector((state) => ({ ...state.food }));
+  const { food, relatedPosts } = useSelector((state) => ({ ...state.food }));
 
   const { id } = useParams();
-  // console.log("mu", id);
+  const tags = food?.tags;
+
+  useEffect(() => {
+    tags && dispatch(getRelatedPosts(tags));
+  }, [tags]);
   useEffect(() => {
     if (id) {
       // console.log(id);
@@ -29,7 +34,7 @@ export const SinglePost = () => {
     <>
       <MDBContainer style={{ marginTop: "100px" }}>
         {/* {console.log(food)} */}
-        <MDBCard className="mb-3 mt-2">
+        <MDBCard className="mb-3 mt-2" >
           <MDBCardImage
             position="top"
             style={{ width: "auto", maxHeight: "600px", margin: "0 auto" }}
@@ -63,6 +68,7 @@ export const SinglePost = () => {
             </MDBCardText>
           </MDBCardBody>
           {/* </MDBCardImage> */}
+          <RelatedPosts relatedPosts={relatedPosts} postId={id} />
         </MDBCard>
       </MDBContainer>
     </>
