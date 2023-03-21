@@ -31,6 +31,7 @@ export const getPostByUser = (userId) => API.get(`/post/userFoods/${userId}`);
 //search
 
 export const getPostBySearch = (searchQuery) =>
-  API.get(`/post/search?searchQuery=${searchQuery}`);
+API.get(`/post/search?searchQuery=${searchQuery}`);
 export const getPostByTag = (tag) => API.get(`/post/tag/${tag}`);
 export const getRelatedPosts = (tags) => API.post(`/post/relatedPosts`, tags);
+export const likePost = (id) => API.patch(`/post/like/${id}`);

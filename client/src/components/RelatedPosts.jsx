@@ -26,9 +26,9 @@ export const RelatedPosts = ({ relatedPosts, postId }) => {
                 <MDBCol>
                   <MDBCard
                     style={{
-                      maxWidth: "320px",
+                      maxWidth: "300px",
                       maxHeight: "400px",
-                      marginBottom: "40px",
+                      marginBottom: "50px",
                       margin: "0 auto",
                     }}
                   >
@@ -36,6 +36,7 @@ export const RelatedPosts = ({ relatedPosts, postId }) => {
                       src={item.imageFile}
                       alt={item.title}
                       position="top"
+                      style={{ width: "auto ",height:"200px", maxHeight: "300px" }}
                     />
                     {/* </Link> */}
                     <span className="text-start tag-card">

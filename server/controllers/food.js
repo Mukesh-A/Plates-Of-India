@@ -118,3 +118,30 @@ export const getRelatedPosts = async (req, res) => {
     res.status(404).json({ message: "Something went wrong" });
   }
 };
+
+export const likePost = async (req, res) => {
+  const { id } = req.params;
+  console.log(id);
+  try {
+    if (!req.userId) {
+      return res.json({ message: "User not login" });
+    }
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+      return res.status(404).json({ message: "Post not exit" });
+    }
+    const post = await FoodModel.findById(id);
+    const index = post.likes.findIndex((id) => id === String(req.userId));
+
+    if (index === -1) {
+      post.likes.push(req.userId);
+    } else {
+      post.likes = post.likes.filter((id) => id !== String(req.userId));
+    }
+    const updatedPost = await FoodModel.findByIdAndUpdate(id, post, {
+      new: true,
+    });
+    res.status(200).json(updatedPost);
+  } catch (error) {
+    res.status(404).json({ message: error.message });
+  }
+};

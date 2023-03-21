@@ -9,6 +9,7 @@ import {
   getPostBySearch,
   getPostByTag,
   getRelatedPosts,
+  likePost,
 } from "../controllers/food.js";
 import auth from "../middleware/auth.js";
 
@@ -24,6 +25,6 @@ router.post("/", auth, createFood);
 router.delete("/:id", auth, deletePost);
 router.patch("/:id", auth, updatePost);
 router.get("/userFoods/:id", auth, getPostByUser);
-// console.log("hhh");
+router.patch("/like/:id", auth, likePost);
 
 export default router;

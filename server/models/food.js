@@ -11,9 +11,9 @@ const foodSchema = mongoose.Schema({
     type: Date,
     default: new Date(),
   },
-  likeCount: {
-    type: Number,
-    default: 0,
+  likes: {
+    type: [String],
+    default: [],
   },
 });
 

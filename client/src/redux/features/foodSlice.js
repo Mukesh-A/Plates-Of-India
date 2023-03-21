@@ -113,6 +113,19 @@ export const getRelatedPosts = createAsyncThunk(
     }
   }
 );
+export const likePost = createAsyncThunk(
+  "post/likePost",
+  async ({ _id }, { rejectWithValue }) => {
+    // console.log("1", id);
+    try {
+      const response = await api.likePost(_id);
+      // console.log(response);
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(error.response.data);
+    }
+  }
+);
 
 const foodSlice = createSlice({
   name: "post",
@@ -253,6 +266,24 @@ const foodSlice = createSlice({
     [getRelatedPosts.rejected]: (state, action) => {
       state.loading = false;
       state.error = action.payload.message;
+    },
+
+    [likePost.pending]: (state, action) => {},
+    [likePost.fulfilled]: (state, action) => {
+      state.loading = false;
+      // console.log("action", action);
+      const {
+        arg: { _id },
+      } = action.meta;
+      if (_id) {
+        state.foods = state.foods.map((item) =>
+          item._id === _id ? action.payload : item
+        );
+      }
+    },
+    [likePost.rejected]: (state, action) => {
+      // state.loading = false;
+      // state.error = action.payload.message;
     },
   },
 });
