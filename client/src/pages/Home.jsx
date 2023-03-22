@@ -6,20 +6,24 @@ import { CardFood } from "../components/CardFood";
 import Spinner from "../components/Spinner";
 import { Pagination } from "../components/Pagination";
 
+import Skeleton from "react-loading-skeleton";
+import "react-loading-skeleton/dist/skeleton.css";
+
 export const Home = () => {
   const { foods, loading, currentPage, numberOfPages } = useSelector(
     (state) => ({
       ...state.food,
     })
   );
+
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(getFoods(currentPage));
   }, [currentPage]);
-  if (loading) {
-    return <Spinner />;
-  }
+  // if (loading) {
+  //   return <Spinner />;
+  // }
   return (
     <div
       style={{
@@ -34,7 +38,7 @@ export const Home = () => {
       <MDBRow className="mt-5">
         {foods.length === 0 && (
           <MDBTypography className="text-center mb-0" tag="h2">
-            No Post.
+            <Skeleton height={20} count={5}/>
           </MDBTypography>
         )}
         <MDBCol>
@@ -46,12 +50,14 @@ export const Home = () => {
           </MDBContainer>
         </MDBCol>
       </MDBRow>
-      <Pagination
-        currentPage={currentPage}
-        numberOfPages={numberOfPages}
-        dispatch={dispatch}
-        setCurrentPage={setCurrentPage}
-      />
+      {!loading && (
+        <Pagination
+          currentPage={currentPage}
+          numberOfPages={numberOfPages}
+          dispatch={dispatch}
+          setCurrentPage={setCurrentPage}
+        />
+      )}
     </div>
   );
 };
