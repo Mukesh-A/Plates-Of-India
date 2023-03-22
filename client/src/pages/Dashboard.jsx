@@ -17,6 +17,9 @@ import { Link } from "react-router-dom";
 import { deletePost, getPostByUser } from "../redux/features/foodSlice";
 import Spinner from "../components/Spinner";
 import { toast } from "react-toastify";
+
+import Skeleton from "react-loading-skeleton";
+import "react-loading-skeleton/dist/skeleton.css";
 export const Dashboard = () => {
   const { user } = useSelector((state) => ({ ...state.auth }));
   const { userFoods, loading } = useSelector((state) => ({ ...state.food }));
@@ -69,16 +72,18 @@ export const Dashboard = () => {
       {userFoods &&
         userFoods.map((item) => (
           <MDBCardGroup key={item._id}>
-            <MDBCard style={{ maxWidth: "600px" }} className="mt-2">
+            <MDBCard style={{ maxWidth: "600px",maxHeight:"150px" }} className="mt-2">
               <MDBRow className="g-0">
                 <MDBCol md="4">
                   <MDBCardImage
-                    className="rounded"
+                   
+                    className="rounded "
                     src={item.imageFile}
                     alt={item.title}
                     fluid
                   />
                 </MDBCol>
+
                 <MDBCol md="8">
                   <MDBCardBody>
                     <MDBCardTitle className="text-start">
