@@ -84,7 +84,7 @@ export const CardFood = ({
     <MDBCardGroup>
       <MDBCard
         className="h-60 mt-2 d-sm-flex"
-        style={{ minWidth: "18rem", maxWidth: "40rem", margin: "20px" }}
+        style={{ maxWidth: "30rem", margin: "10px" }}
       >
         {loading ? (
           <Skeleton height={200} />

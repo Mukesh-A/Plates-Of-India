@@ -37,26 +37,26 @@ export const Header = () => {
   const Logout = () => {
     dispatch(setLogout());
   };
-  const handelSubmit = (e) => {
-    e.preventDefault();
-    if (search) {
-      dispatch(searchPosts(search));
-      navigate(`/post/search?searchQuery=${search}`);
-      setSearch("");
-    } else {
-      navigate("/");
-    }
-  };
+  // const handelSubmit = (e) => {
+  //   e.preventDefault();
+  //   if (search) {
+  //     dispatch(searchPosts(search));
+  //     navigate(`/post/search?searchQuery=${search}`);
+  //     setSearch("");
+  //   } else {
+  //     navigate("/");
+  //   }
+  // };
 
   return (
     <MDBNavbar
       fixed="top"
       expand="lg"
-      style={{ backgroundColor: "#f0e6ea", height: "70px" }}
+      style={{ backgroundColor: "#1c1e24", height: "70px", zIndex: 99 }}
     >
       <MDBContainer>
         <MDBNavbarBrand
-          style={{ color: "#606080", fontWeight: "600", fontSize: "18px" }}
+          style={{ color: "#BC9045", fontWeight: "600", fontSize: "20px" }}
         >
           <img src={logo} height="60" alt="" loading="lazy" />
           Plates of India
@@ -66,7 +66,7 @@ export const Header = () => {
           aria-expanded="false"
           aria-label="Toggle navigation"
           onClick={() => setShow(!show)}
-          style={{ color: "#606080" }}
+          style={{ color: "#888" }}
         >
           <MDBIcon icon="bars" fas />
         </MDBNavbarToggler>
@@ -116,27 +116,13 @@ export const Header = () => {
                   display: "flex",
                   alignItems: "center",
                   justifyContent: "center",
-                  color: "blue",
+                  color: "#fff",
                 }}
               >
                 {user?.user?.name}
               </h4>
             )}
           </MDBNavbarNav>
-          <form className="d-flex input-group w-auto" onSubmit={handelSubmit}>
-            <input
-              type="text"
-              className="form-control"
-              placeholder="Search by Title ..."
-              value={search}
-              onChange={(e) => {
-                setSearch(e.target.value);
-              }}
-            />
-            <div className="" style={{ marginTop: "5px", marginLeft: "5px" }}>
-              <MDBIcon fas icon="search" />
-            </div>
-          </form>
         </MDBCollapse>
       </MDBContainer>
     </MDBNavbar>

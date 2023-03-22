@@ -91,6 +91,10 @@ export const getPostBySearch = async (req, res) => {
   try {
     const title = new RegExp(searchQuery, "i");
     const posts = await FoodModel.find({ title });
+    if (posts.length === 0) {
+      return res.json(posts.length);
+    }
+    console.log(posts.length);
     res.json(posts);
   } catch (error) {
     res.status(404).json({ message: "Something went wrong" });

@@ -82,7 +82,6 @@ export const searchPosts = createAsyncThunk(
   async (search, { rejectWithValue }) => {
     try {
       const response = await api.getPostBySearch(search);
-
       return response.data;
     } catch (error) {
       return rejectWithValue(error.response.data);
