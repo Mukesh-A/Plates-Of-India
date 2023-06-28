@@ -1,3 +1,4 @@
+
 import express from "express";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
@@ -28,7 +29,19 @@ mongoose
   .connect(MONGODB_URL)
   .then(() => {
     app.listen(port, () => {
+      // if (process.env.NODE_ENV == "production") {
+
+      //   app.get("/", (req, res) => {
+      //     app.use(express.static(path.resolve(__dirname, "client", "build")));
+      //     res.sendFile(
+      //       path.resolve(__dirname, "client", "build", "index.html")
+      //     );
+      //   });
+      // }
+
       console.log(`Server Running in port ${port}`);
+      // const ss = path.resolve(__dirname);
+      // console.log(ss);
     });
   })
   .catch((err) => console.log(err));

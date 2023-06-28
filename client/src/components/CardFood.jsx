@@ -17,6 +17,8 @@ import { likePost } from "../redux/features/foodSlice";
 
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
+import { LazyLoadImage } from "react-lazy-load-image-component";
+import  PlaceholderImage  from "../assets/logos.png";
 export const CardFood = ({
   imageFile,
   description,
@@ -89,11 +91,15 @@ export const CardFood = ({
         {loading ? (
           <Skeleton height={200} />
         ) : (
-          <MDBCardImage
+          <LazyLoadImage
             src={imageFile}
+            
             alt={title}
+            
             position="top"
+           
             style={{ maxWidth: "100%", height: "200px" }}
+            
           />
         )}
         {loading ? <Skeleton height={20} width={200} style={{margin:"10px"}}/> : <div className="top-left">{name}</div>}

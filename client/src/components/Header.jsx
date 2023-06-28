@@ -49,16 +49,15 @@ export const Header = () => {
   // };
 
   return (
-    <MDBNavbar
-      fixed="top"
+    <MDBNavbar className="navbar navbar-expand-lg fixed-top navbar-scroll"
       expand="lg"
-      style={{ backgroundColor: "#1c1e24", height: "70px", zIndex: 99 }}
+      style={{  backdropFilter: blur("6px") }}
     >
       <MDBContainer>
         <MDBNavbarBrand
-          style={{ color: "#BC9045", fontWeight: "600", fontSize: "20px" }}
+          style={{ color: "#00464D", fontWeight: "500", fontSize: "1.7rem", padding:0 }}
         >
-          <img src={logo} height="60" alt="" loading="lazy" />
+          <img className="icon" src={logo} height="80" alt=""  />
           Plates of India
         </MDBNavbarBrand>
         <MDBNavbarToggler
@@ -116,7 +115,7 @@ export const Header = () => {
                   display: "flex",
                   alignItems: "center",
                   justifyContent: "center",
-                  color: "#fff",
+                  color: "#00464D",
                 }}
               >
                 {user?.user?.name}
