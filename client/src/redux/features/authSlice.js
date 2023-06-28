@@ -4,7 +4,7 @@ import * as api from "../api";
 // here we have more than one argu so we are passing in the form of object
 
 export const login = createAsyncThunk(
-  "auth/login",
+  "/users/signIn",
   async ({ formValue, navigate, toast }, { rejectWithValue }) => {
     try {
       const response = await api.signIn(formValue);
@@ -18,7 +18,7 @@ export const login = createAsyncThunk(
   }
 );
 export const register = createAsyncThunk(
-  "auth/register",
+  "/users/signUp",
   async ({ formValue, navigate, toast }, { rejectWithValue }) => {
     try {
       const response = await api.signUp(formValue);
