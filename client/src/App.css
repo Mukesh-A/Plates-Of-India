@@ -29,9 +29,9 @@ body {
 
   .foodName{
     color: #806a78;
-    font-size: 18px;
+    font-size: 14px;
     margin: 0 0 0 4px;
-    font-weight: 500;
+    
   }
   .form-control:focus{
     /* border-color: none !important; */
