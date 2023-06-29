@@ -52,9 +52,13 @@ export const Dashboard = () => {
   return (
     <div
       style={{
-        margin: "auto",
-        padding: "120px",
-        maxWidth: "900px",
+        // display:"flex",
+        // flexDirection:"column",
+        // justifyContent:"center",
+        // alignItems:"center",
+        margin:"auto",
+        paddingTop: "120px",
+        maxWidth: "600px",
         alignContent: "center",
       }}
     >
@@ -72,9 +76,9 @@ export const Dashboard = () => {
       {userFoods &&
         userFoods.map((item) => (
           <MDBCardGroup key={item._id}>
-            <MDBCard style={{ maxWidth: "600px",maxHeight:"150px" }} className="mt-2">
-              <MDBRow className="g-0">
-                <MDBCol md="4">
+            <MDBCard className="mt-2 m-4">
+              <MDBRow className="g-0"  >
+                <MDBCol md="4" >
                   <MDBCardImage
                    
                     className="rounded "

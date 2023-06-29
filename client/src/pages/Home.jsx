@@ -93,9 +93,9 @@ export const Home = () => {
       </form>
 
       <MDBRow className="mt-5">
-        <MDBCol>
-          <MDBContainer>
-            <MDBRow className="row-col-1 row-cols-md-3 g-2">
+        <MDBCol >
+          <MDBContainer >
+            <MDBRow className="row-col-1 row-cols-md-3 g-5">
               {foods !== 0 ? (
                 foods?.map((item, index) => <CardFood key={index} {...item} />)
               ) : (

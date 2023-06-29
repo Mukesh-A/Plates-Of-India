@@ -67,7 +67,7 @@ export const deletePost = async (req, res) => {
 };
 export const updatePost = async (req, res) => {
   const { id } = req.params;
-  const { title, description, creator, imageFile, tags } = req.body;
+  const { title, description, creator, imageFile, tags,rate } = req.body;
   try {
     if (!mongoose.Types.ObjectId.isValid(id)) {
       return res.status(404).json({ message: "Post not exit" });
@@ -78,6 +78,7 @@ export const updatePost = async (req, res) => {
       creator,
       imageFile,
       tags,
+      rate,
       _id: id,
     };
     await FoodModel.findByIdAndUpdate(id, updatedPost, { new: true });

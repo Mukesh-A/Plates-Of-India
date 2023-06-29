@@ -19,6 +19,7 @@ const initialState = {
   title: "",
   description: "",
   tags: [],
+  rate:""
 };
 
 export const AddEditTour = () => {
@@ -29,7 +30,7 @@ export const AddEditTour = () => {
   const { user } = useSelector((state) => ({ ...state.auth }));
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { title, description, tags } = foodData;
+  const { title, description, tags,rate } = foodData;
   const { id } = useParams();
 
   useEffect(() => {
@@ -58,12 +59,13 @@ export const AddEditTour = () => {
   };
 
   const handelClear = () => {
-    setFoodData({ title: "", description: "", tags: [] });
+    setFoodData({ title: "", description: "", tags: [], rate: "" });
   };
 
   const onInputChange = (e) => {
     const { name, value } = e.target;
     setFoodData({ ...foodData, [name]: value });
+    console.log(foodData);
   };
 
   const handleAddTag = (tag) => {
@@ -129,6 +131,19 @@ export const AddEditTour = () => {
                 value={tags}
                 onAdd={(tag) => handleAddTag(tag)}
                 onDelete={(tag) => handleDeleteTag(tag)}
+              />
+            </div>
+            <div className="col-md-12">
+              <input
+                type="number"
+                placeholder="₹ Rate"
+                value={rate}
+                name="rate"
+                onChange={onInputChange}
+                className="form-control"
+                required
+                invalid
+                validation="Please provide rate"
               />
             </div>
             <div className="d-flex-justify-content-start">

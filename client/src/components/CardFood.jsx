@@ -85,8 +85,8 @@ export const CardFood = ({
   return (
     <MDBCardGroup>
       <MDBCard
-        className="h-60 mt-2 d-sm-flex"
-        style={{ maxWidth: "30rem", margin: "10px"}}
+        className="h-60  mt-2 d-sm-flex shadow"
+        style={{maxWidth:"30rem"}}
       >
         {loading ? (
           <Skeleton height={200} />
@@ -98,7 +98,7 @@ export const CardFood = ({
             
             position="top"
            
-            style={{ maxWidth: "100%", height: "200px" }}
+            style={{ maxWidth: "100%", height: "200px", borderRadius:"5px" }}
             
           />
         )}
@@ -110,7 +110,7 @@ export const CardFood = ({
             </Link>
           ))}
           <MDBBtn
-            style={{ float: "right" }}
+            style={{ float: "right", marginRight:"10px"}}
             tag="a"
             color="none"
             onClick={!user?.user ? null : handelLikes}

@@ -2,7 +2,7 @@ body {
     font-family: Roboto, Helvetica, Arial, sans-serif;
   }
   .header-text{
-    color:#777;
+    color:#222;
     font-weight: 500;
     margin-top: 17px;
     font-size: 17px;
@@ -24,6 +24,7 @@ body {
   }
   .navbar{
     backdrop-filter: blur(8px);
+  
   }
 
   .foodName{

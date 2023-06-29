@@ -23,6 +23,7 @@ export const SinglePost = () => {
 
   const { id } = useParams();
   const tags = food?.tags;
+  console.log(food);
 
   useEffect(() => {
     tags && dispatch(getRelatedPosts(tags));
@@ -59,7 +60,7 @@ export const SinglePost = () => {
           ) : (
             <MDBCardImage
               position="top"
-              style={{ width: "auto", maxHeight: "600px", margin: "0 auto" }}
+              style={{ maxHeight: "600px", margin: "0 auto" }}
               src={food?.imageFile}
               alt={food?.title}
             />
@@ -91,6 +92,9 @@ export const SinglePost = () => {
               <small className="text-muted ">
                 {moment(food?.createdAt).fromNow() || <Skeleton width={200} />}
               </small>
+              <p className="text-start foodName">
+                Approx:{food?.rate || ""}
+              </p>
               <MDBCardText className="lead mb-0 text-start">
                 {food?.description || <Skeleton height={70} />}
               </MDBCardText>
