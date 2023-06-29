@@ -65,7 +65,7 @@ export const AddEditTour = () => {
   const onInputChange = (e) => {
     const { name, value } = e.target;
     setFoodData({ ...foodData, [name]: value });
-    console.log(foodData);
+ 
   };
 
   const handleAddTag = (tag) => {
