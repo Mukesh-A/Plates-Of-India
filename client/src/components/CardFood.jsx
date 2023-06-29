@@ -51,7 +51,7 @@ export const CardFood = ({
     if (likes.length > 0) {
       return likes.find((like) => like === userId) ? (
         <>
-          <MDBIcon fas icon="heart" />
+          <MDBIcon fas icon="heart" style={{color:"#00464D"}} />
           &nbsp;
           {likes.length > 1 ? (
             <MDBTooltip
