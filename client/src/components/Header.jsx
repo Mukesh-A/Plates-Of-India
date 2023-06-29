@@ -93,7 +93,7 @@ export const Header = () => {
             )}
             {user?.user._id ? (
               <MDBNavbarItem>
-                <MDBNavbarLink href="/users/signIn">
+                <MDBNavbarLink href="/login">
                   <p className="header-text" onClick={Logout}>
                     Logout
                   </p>
@@ -101,7 +101,7 @@ export const Header = () => {
               </MDBNavbarItem>
             ) : (
               <MDBNavbarItem>
-                <MDBNavbarLink href="/users/signUp">
+                <MDBNavbarLink href="/login">
                   <p className="header-text">Login</p>
                 </MDBNavbarLink>
               </MDBNavbarItem>

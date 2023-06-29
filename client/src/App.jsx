@@ -28,8 +28,8 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/post/search" element={<Home />} />
           <Route path="/post/tag/:tag" element={<TagPosts />} />
-          <Route path="/users/signIn" element={<Login />} />
-          <Route path="/users/signUp" element={<Register />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
           <Route
             path="/addPost"
             element={
