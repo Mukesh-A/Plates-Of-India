@@ -92,9 +92,9 @@ export const SinglePost = () => {
               <small className="text-muted ">
                 {moment(food?.createdAt).fromNow() || <Skeleton width={200} />}
               </small>
-              <p className="text-start foodName">
+              <span className="text-start p-4 fw-bold">
                 Approx: ₹{food?.rate || <Skeleton width={200} />}
-              </p>
+              </span>
               <MDBCardText className="lead mb-0 text-start">
                 {food?.description || <Skeleton height={70} />}
               </MDBCardText>
