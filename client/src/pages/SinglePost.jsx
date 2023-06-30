@@ -77,7 +77,7 @@ export const SinglePost = () => {
             <h3>
               {food.title || <Skeleton width={500} />}&ensp;&ensp;
               {/* <i class="fas fa-share-from-square" style={{fontSize:"22px"}}></i> */}
-              <MDBBtn className="" tag="a" color="none">
+              {food.title && <MDBBtn className="" tag="a" color="none">
                 <MDBIcon
                   fas
                   icon="share-from-square"
@@ -85,7 +85,7 @@ export const SinglePost = () => {
                   size="xs"
                   onClick={() => handleClick()}
                 />
-              </MDBBtn>
+              </MDBBtn>}
             </h3>
             <span>
               <p className="text-start foodName">
