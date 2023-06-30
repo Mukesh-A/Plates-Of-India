@@ -56,6 +56,7 @@ export const Header = () => {
       <MDBContainer>
         <MDBNavbarBrand
           style={{ color: "#00464D", fontWeight: "500", fontSize: "1.7rem", padding:0 }}
+          href='/'
         >
           <img className="icon" src={logo} height="80" alt=""  />
           Plates of India
