@@ -57,6 +57,12 @@ function App() {
           />
           <Route path="*" element={<NotFound />} />
         </Routes>
+        <hr />
+        <footer>
+        {" "}
+        <span>With 💙 Plates of India</span>
+        
+      </footer>
       </div>
     </BrowserRouter>
   );

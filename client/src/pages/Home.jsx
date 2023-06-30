@@ -68,14 +68,15 @@ export const Home = () => {
           style={{
             width: "500px",
             margin: "0 auto",
-            marginTop:"70px",
+            marginTop: "70px",
             display: "flex",
             alignItems: "center",
             gap: "20px",
             // border: "1px solid ",
             borderRadius: "25px",
             padding: "10px",
-            boxShadow: "rgba(0, 145, 255, 0.3) 0px 1px 42px 15px, rgba(0, 0, 0, 0.15) 0px 1px 3px 1px"
+            boxShadow:
+              "rgba(0, 145, 255, 0.3) 0px 1px 42px 15px, rgba(0, 0, 0, 0.15) 0px 1px 3px 1px",
           }}
         >
           <input
@@ -93,8 +94,8 @@ export const Home = () => {
       </form>
 
       <MDBRow className="mt-5">
-        <MDBCol >
-          <MDBContainer >
+        <MDBCol>
+          <MDBContainer>
             <MDBRow className="row-col-1 row-cols-md-3 g-5">
               {foods !== 0 ? (
                 foods?.map((item, index) => <CardFood key={index} {...item} />)
@@ -119,6 +120,7 @@ export const Home = () => {
           setCurrentPage={setCurrentPage}
         />
       )}
+      
     </div>
   );
 };

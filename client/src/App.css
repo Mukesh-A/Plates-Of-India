@@ -37,3 +37,16 @@ body {
     /* border-color: none !important; */
     box-shadow: 0 0 0 0.1rem #fff !important;
   }
+  footer{
+  
+  
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* font-size: x-large; */
+  height: 70px;
+  color: #00464D;
+  font-size: 1.1rem;
+  font-weight: 600;
+
+  }
