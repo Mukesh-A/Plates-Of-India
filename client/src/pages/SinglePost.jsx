@@ -6,6 +6,7 @@ import {
   MDBCardImage,
   MDBContainer,
   MDBIcon,
+  MDBBtn,
 } from "mdb-react-ui-kit";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
@@ -16,14 +17,14 @@ import { RelatedPosts } from "../components/RelatedPosts.jsx";
 
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
-// import logo from "../assets/logos.png";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 export const SinglePost = () => {
   const dispatch = useDispatch();
   const { food, relatedPosts } = useSelector((state) => ({ ...state.food }));
 
   const { id } = useParams();
   const tags = food?.tags;
- 
 
   useEffect(() => {
     tags && dispatch(getRelatedPosts(tags));
@@ -34,6 +35,13 @@ export const SinglePost = () => {
       dispatch(getPost(id));
     }
   }, [id]);
+
+  const handleClick = () => {
+    toast.success("Share Link Copied", {
+      position: toast.POSITION.TOP_RIGHT,
+    });
+    navigator.clipboard.writeText(window.location.href);
+  };
   return (
     <>
       <MDBContainer style={{ marginTop: "100px" }}>
@@ -66,7 +74,19 @@ export const SinglePost = () => {
             />
           )}
           <MDBCardBody>
-            <h3>{food.title || <Skeleton width={500} />}</h3>
+            <h3>
+              {food.title || <Skeleton width={500} />}&ensp;&ensp;
+              {/* <i class="fas fa-share-from-square" style={{fontSize:"22px"}}></i> */}
+              <MDBBtn className="" tag="a" color="none">
+                <MDBIcon
+                  fas
+                  icon="share-from-square"
+                  style={{ color: "#333" }}
+                  size="xs"
+                  onClick={() => handleClick()}
+                />
+              </MDBBtn>
+            </h3>
             <span>
               <p className="text-start foodName">
                 Posted Bt:{food?.name || <Skeleton width={200} />}
@@ -104,6 +124,7 @@ export const SinglePost = () => {
           <RelatedPosts relatedPosts={relatedPosts} postId={id} />
         </MDBCard>
       </MDBContainer>
+      <ToastContainer />
     </>
   );
 };
